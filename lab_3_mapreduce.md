@@ -28,7 +28,7 @@
         {
             "classification": "mapred-site",
             "properties": {
-              "mapreduce.job.reduces": "X"
+              "mapreduce.job.reduces": "3"
             }
         }
     ]
