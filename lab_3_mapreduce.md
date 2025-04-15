@@ -24,6 +24,12 @@
                 "dfs.block.size": "16M",
                 "dfs.replication": "3"
             }
+        },
+        {
+            "classification": "mapred-site",
+            "properties": {
+              "mapreduce.job.reduces": "X"
+            }
         }
     ]
     ```
