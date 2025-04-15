@@ -120,6 +120,12 @@ $ hadoop fs -ls /<Your ITSC Account>/data
 $ hdfs dfs -df -h
 ```
 
+You can use a HDFS filesystem checking utility to get a file's block report, e.g.,
+
+```shell
+$ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
+```
+
 <br>
 
 # MapReduce job submission
