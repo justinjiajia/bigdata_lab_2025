@@ -118,7 +118,6 @@ for line in sys.stdin:
         print(f"{word}\t{1}")
 ```
 
-<br>
 
 ### Reducer code
 
