@@ -155,21 +155,21 @@ if word == current_word:
 First, create a local plain text file and populate it with several words:
 
 ```shell
-$ echo -e "LAB\nA\nDATA1\na?\nbig.\nTHE\nlab\nintelligence\nanalytics\nThe\nBIG\ndata2\nan\nBusiness\nL.A.B." > input.txt
+echo -e "LAB\nA\nDATA1\na?\nbig.\nTHE\nlab\nintelligence\nanalytics\nThe\nBIG\ndata2\nan\nBusiness\nL.A.B." > input.txt
 ```
 
 
-Note: `-e` enables `echo` to interpret backslash escapes.
+Note: `-e` enables interpretation of backslash escapes.
 
 Run a sequence of linux commands and Python scripts chained by the pipe operator `|`:
 
 ```shell
-$ cat input.txt | python ~/mapper.py | sort -t '\t' -k 1,1 | python ~/reducer.py
+cat input.txt | python ~/mapper.py | sort -k 1,1 | python ~/reducer.py
 ```
 
 Note: `sort` is a Linux command that sorts lines of text. Here, it emulates Hadoop's shuffle and sort phase locally.
 
-- By default, `sort` splits each line into fields separated by whitespace (e.g., use `-t '\t'` for tabs).
+- By default, `sort` splits each line into fields separated by whitespace (e.g., use `-t $'\t'` explictly for tabs).
 
 - `-k <start>,<end>` sorts lines by fields from <start> to <end> (inclusive). E.g., `-k 1,1` sorts only by the first field (key), grouping identical keys together.
 
@@ -186,7 +186,13 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
   -mapper mapper.py -reducer reducer.py
 ```
 
-Note: `-D` and `-files` are generic options. They must appear before streaming-specific options such as `-input`, `-output`, `-mapper`, and `-reducer`.
+Note: 
+
+- `-D`: Set one Hadoop configuration property at a time
+- `-files`: Specify a comma-separated list of files (no spaces) to be copied to the cluster
+- `-D` and `-files` are generic options. They must appear before streaming-specific options such as `-input`, `-output`, `-mapper`, and `-reducer`.
+- `\`: Tell the shell this command continues on the next line. Without it, pressing Enter would execute the command immediately.
+
 
 <br>
 
@@ -332,12 +338,12 @@ $ cat output/part-00002
 ## Step 3: Submitting the job
 
 ```shell
-$ mapred streaming -libjars partitioner.jar  \
-  -files mapper.py,reducer.py,partitioner.jar \
-  -input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_3 \
-  -mapper "python mapper.py" -reducer "python reducer.py" \
-  -combiner "python reducer.py" \
-  -partitioner CustomPartitioner
+mapred streaming -libjars partitioner.jar  \
+-files mapper.py,reducer.py,partitioner.jar \
+-input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_3 \
+-mapper "python mapper.py" -reducer "python reducer.py" \
+-combiner "python reducer.py" \
+-partitioner CustomPartitioner
 ```
 
 <br>
