@@ -307,8 +307,11 @@ $ mapred streaming -D mapreduce.framework.name=local \
   -partitioner CustomPartitioner
 ```
 
-Note:  Hadoop assumes paths are in HDFS. The `file://` prefix above explicitly tells Hadoop to use the local file system (not HDFS) for input/output paths.
-`-libjars` is another example of generic options, and must be specified before streaming options.
+Note:
+
+- Hadoop assumes paths are in HDFS. The `file://` prefix above explicitly tells Hadoop to use the local file system (not HDFS) for input/output paths.
+
+- `-libjars` specifies JAR files to include in the job's classpath. It is another example of generic options and must be specified before all streaming options. 
 
 ### Viewing the local output
 
