@@ -48,7 +48,8 @@
 nano data_prep.sh
 ```
 
-Copy and paste the code snippet below  into the *data_prep.sh* file, and change all occurrences of `<Your ITSC Account>` to your ITSC account string:
+Copy and paste the code snippet below into the *data_prep.sh* file, and change all occurrences of `<Your ITSC Account>` to your ITSC account string. 
+
 
 ```shell
 #!/bin/bash
@@ -65,6 +66,8 @@ hadoop fs -mkdir /<Your ITSC Account>
 hadoop fs -put data /<Your ITSC Account>
 hadoop fs -df -h /<Your ITSC Account>/data
 ```
+
+This allows you to do all the local and HDFS file system operations in one go.
 
 Save the change and get back to the shell. Then run:
 
