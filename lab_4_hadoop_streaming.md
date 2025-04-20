@@ -67,7 +67,6 @@ hadoop fs -put data /<Your ITSC Account>
 hadoop fs -df -h /<Your ITSC Account>/data
 ```
 
-This allows you to do all the local and HDFS file system operations in one go.
 
 Save the change and get back to the shell. Then run:
 
@@ -80,7 +79,9 @@ or
 sh data_prep.sh
 ```
 
-You can use a HDFS filesystem checking utility to get a file's block report, e.g.,
+This allows you to do all the local and HDFS file system operations in one go.
+
+Then, you can use a HDFS filesystem checking utility to get a file's block report, e.g.,
 
 ```shell
 $ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
