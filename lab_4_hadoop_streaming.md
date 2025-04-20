@@ -283,6 +283,7 @@ You can then view the content of *partitioner.jar* to make sure that the *.class
 $ jar -tf partitioner.jar
 ```
 
+<br>
 
 ## Step 2: Testing the custom Partitioner
 
@@ -333,6 +334,8 @@ $ mapred streaming -libjars partitioner.jar  \
   -partitioner CustomPartitioner
   
 ```
+
+<br>
 
 ## Step 4: Viewing the final output
 
