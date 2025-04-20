@@ -200,7 +200,8 @@ tail -n20 combinedresult.txt
 
 # Using Combiners
 
-IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
+<code style="color : orangered">IMPORTANT: Copy and paste the following code line by line, including `\` at the end.</code>
+
 
 ```shell
 $ mapred streaming -D mapreduce.job.reduces=2 \
