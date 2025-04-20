@@ -270,9 +270,9 @@ $ jar -tf partitioner.jar
 
 Since the partitioner is a Java class, we cannot test the code as before.
 
-Instead, we test it by forcing MapReduce to run locally. 
+Instead, we test it by forcing MapReduce to run locally using `mapreduce.framework.name=local`. 
 
-The `file://` prefix below tells the local MapReduce run to read input from and write output to the local file system instead of HDFS.
+### Submit a local MapReduce job
 
 IMPORTANT: Copy and paste the following code line by line.
 
@@ -285,9 +285,11 @@ $ mapred streaming -D mapreduce.framework.name=local \
   -partitioner CustomPartitioner
 ```
 
+The `file://` prefix above tells the local MapReduce run to read input from and write output to the local file system instead of HDFS.
+
 <br>
 
-## View the local output
+### View the local output
 
 
 ```shell
@@ -299,7 +301,7 @@ $ cat output/part-00002
 
 <br>
 
-## Submit the job
+## Step 3: Submit the job
 
 ```shell
 $ mapred streaming -libjars partitioner.jar  \
@@ -311,7 +313,7 @@ $ mapred streaming -libjars partitioner.jar  \
   
 ```
 
-## View the output
+## Step 3: View the output
 
 ```shell
 hadoop fs -cat /<Your ITSC Account>/program_output_3/part-00000 
