@@ -89,9 +89,11 @@ $ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 
 <br>
 
+# Write a custom word count program
 
+<br>
 
-# Create program files for Mapper and Reducer
+## Create the program files for Mapper and Reducer
 
 <br>
 
@@ -150,17 +152,19 @@ if word == current_word:
 
 <br>
 
-# Test the programs locally (Optional)
+## Test the programs locally (Optional)
 
 
 ```shell
-$ chmod +x mapper.py reducer.py
-$ echo "foo FOO2 quux. lab foo Ba1r Quux" | ~/mapper.py | sort -k 1,1 | ~/reducer.py
+$ echo -e "LAB\nA\nDATA1\na?\nbig.\nTHE\nlab\nintelligence\nanalytics\nThe\nBIG\ndata2\nan\nBusiness\nL.A.B." > input.txt
+$ cat input.txt | python ~/mapper.py | sort -k 1,1 | python ~/reducer.py
 ```
+
+Note: `-e` enables `echo` to interpret backslash escapes.
 
 <br>
 
-# Submit the job
+## Submit the job
 
 
 ```shell
@@ -172,7 +176,7 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 
 <br>
 
-# View the output
+## View the output
 
 ```shell
 hadoop fs -cat /<Your ITSC Account>/program_output_1/part-* > combinedresult.txt
@@ -182,8 +186,9 @@ tail -n20 combinedresult.txt
 
 <br>
 
-# Use of combiners
+## Use of combiners
 
+IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
 ```shell
 $ mapred streaming -D mapreduce.job.reduces=2 \
@@ -193,6 +198,124 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 ```
 
 
+
+# USe Custom Partitioner (Optional)
+
+
+
+Note: You can skip step 1 by using a pre-compiled jar file.
+
+##  Step 1: Code and compile the Custom Partitioner 
+
+
+
+```shell
+nano CustomPartitioner.java
+```
+
+Copy and paste the Java code snippet below into the file:
+
+```java
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.Partitioner;
+import org.apache.hadoop.mapred.JobConf;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+public class CustomPartitioner implements Partitioner<Text, Text> {
+
+    // Reserved words to send to partition 0
+    private static final Set<String> RESERVED_WORDS = new HashSet<>(
+        Arrays.asList("the", "a", "an")
+    );
+
+    @Override
+    public int getPartition(Text key, Text value, int numPartitions) {
+        String word = key.toString().toLowerCase().trim(); 
+
+        // Edge case: If only 1 reducer, everything goes to partition 0
+        if (numPartitions <= 1) {
+            return 0;
+        }
+
+        // Send reserved words to partition 0
+        if (RESERVED_WORDS.contains(word)) {
+            return 0;
+        } else {
+            // Distribute other words across partitions 1 to (numPartitions-1)
+            int hash = key.toString().hashCode();
+            return (hash & Integer.MAX_VALUE) % (numPartitions - 1) + 1;
+        }
+    }
+
+    @Override
+    public void configure(JobConf job) {}
+}
+```
+
+Compile the Java file and pack the resulting *CustomPartitioner.class* file into a .jar file called *partitioner.jar*: 
+
+```shell
+$ javac -classpath $(hadoop classpath) CustomPartitioner.java
+$ jar -cf partitioner.jar CustomPartitioner*.class
+```
+
+```shell
+$ jar -tf partitioner.jar
+```
+
+
+## Step 2: Test the code locally
+
+Since the partitioner is a Java class, we cannot test the code as before.
+
+Instead, we test it by forcing MapReduce to run locally. 
+
+The `file://` prefix below tells the local MapReduce run to read input from and write output to the local file system instead of HDFS.
+
+IMPORTANT: Copy and paste the following code line by line.
+
+```shell
+$ mapred streaming -D mapreduce.framework.name=local \
+  -libjars partitioner.jar  \
+  -files mapper.py,reducer.py,partitioner.jar \
+  -input file://$(pwd)/input.txt -output file://$(pwd)/output \
+  -mapper "python mapper.py" -reducer "python reducer.py" \
+  -partitioner CustomPartitioner
+```
+
+<br>
+
+## View the local output
+
+
+```shell
+$ ls output
+$ cat output/part-00000
+$ cat output/part-00001
+$ cat output/part-00002
+```
+
+<br>
+
+## Submit the job
+
+```shell
+$ mapred streaming -libjars partitioner.jar  \
+  -files mapper.py,reducer.py,partitioner.jar \
+  -input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_3 \
+  -mapper "python mapper.py" -reducer "python reducer.py" \
+  -combiner "python reducer.py" \
+  -partitioner CustomPartitioner
+  
+```
+
+## View the output
+
+```shell
+hadoop fs -cat /<Your ITSC Account>/program_output_3/part-00000 
+```
 
 
 
