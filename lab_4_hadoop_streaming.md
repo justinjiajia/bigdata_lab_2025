@@ -176,7 +176,7 @@ By default, `sort` splits each line into fields separated by whitespace (e.g., u
 
 ## Step 3: Submitting the job
 
-<span style="color : orangered">IMPORTANT: Copy and paste the following code line by line, including `\` at the end.</span>
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
 ```shell
 $ mapred streaming -D mapreduce.job.reduces=2 \
@@ -201,7 +201,7 @@ tail -n20 combinedresult.txt
 
 # Using Combiners
 
-<span style="color : orangered">IMPORTANT: Copy and paste the following code line by line, including `\` at the end.</span>
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
 
 ```shell
@@ -294,7 +294,7 @@ This is configured by setting `-D mapreduce.framework.name=local`.
 
 ### Submitting a local MapReduce job
 
-IMPORTANT: Copy and paste the following code line by line.
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
 ```shell
 $ mapred streaming -D mapreduce.framework.name=local \
