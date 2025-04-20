@@ -184,7 +184,7 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
   -mapper mapper.py -reducer reducer.py
 ```
 
-Note: `-D` and `-files` are generic options. They must be specified before streaming options such as `-input`, `-output`, `-mapper`, and `-reducer`.
+Note: `-D` and `-files` are generic options. They must appear before streaming-specific options such as `-input`, `-output`, `-mapper`, and `-reducer`.
 
 <br>
 
@@ -198,7 +198,7 @@ tail -n20 combinedresult.txt
 
 <br>
 
-# Use of Combiners
+# Using Combiners
 
 IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
@@ -211,7 +211,7 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 
 <br>
 
-# USe custom Partitioner (Optional)
+# Using custom Partitioner (Optional)
 
 
 Hadoop Streaming allows the use of custom partitioners, but it requires the partitioner to be implemented in Java.
@@ -303,7 +303,7 @@ $ mapred streaming -D mapreduce.framework.name=local \
   -partitioner CustomPartitioner
 ```
 
-Note:  The `file://` prefix above tells the local MapReduce run to read input from and write output to the local file system instead of HDFS.
+Note:  Hadoop assumes paths are in HDFS. The `file://` prefix above explicitly tells Hadoop to use the local file system (not HDFS) for input/output paths.
 `-libjars` is another example of generic options, and must be specified before streaming options.
 
 <br>
