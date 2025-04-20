@@ -309,8 +309,6 @@ $ mapred streaming -D mapreduce.framework.name=local \
 Note:  Hadoop assumes paths are in HDFS. The `file://` prefix above explicitly tells Hadoop to use the local file system (not HDFS) for input/output paths.
 `-libjars` is another example of generic options, and must be specified before streaming options.
 
-<br>
-
 ### Viewing the local output
 
 
