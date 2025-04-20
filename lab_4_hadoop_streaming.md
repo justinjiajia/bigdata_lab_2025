@@ -1,6 +1,6 @@
 # EMR settings
 
-- EMR release: 7.1.0 
+- EMR release: 7.8.0 
 
 - Application: Hadoop
   
@@ -21,8 +21,14 @@
         {
             "classification": "hdfs-site",
             "properties": {
-                "dfs.blocksize": "16M",
+                "dfs.block.size": "16M",
                 "dfs.replication": "3"
+            }
+        },
+        {
+            "classification": "mapred-site",
+            "properties": {
+                "mapreduce.job.reduces": "3"
             }
         }
     ]
