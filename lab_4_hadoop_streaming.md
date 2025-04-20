@@ -80,7 +80,15 @@ or
 sh data_prep.sh
 ```
 
+You can use a HDFS filesystem checking utility to get a file's block report, e.g.,
+
+```shell
+$ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
+```
+
 <br>
+
+
 
 # Create program files for Mapper and Reducer
 
