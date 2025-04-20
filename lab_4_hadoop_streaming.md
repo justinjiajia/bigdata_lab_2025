@@ -95,7 +95,6 @@ $ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 
 ## Step 1: Create the program files for Mapper and Reducer
 
-<br>
 
 ### Mapper code
 
