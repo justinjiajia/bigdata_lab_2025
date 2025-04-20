@@ -164,12 +164,14 @@ Note: `-e` enables `echo` to interpret backslash escapes.
 Run a sequence of linux commands and Python scripts chained by the pipe operator `|`:
 
 ```shell
-$ cat input.txt | python ~/mapper.py | sort -t -k 1,1 | python ~/reducer.py
+$ cat input.txt | python ~/mapper.py | sort -t '\t' -k 1,1 | python ~/reducer.py
 ```
 
 Note: `sort` is a Linux command that sorts lines of text. Here, it emulates Hadoop's shuffle and sort phase locally.
-By default, `sort` splits each line into fields separated by whitespace (e.g., use `-t '\t'` for tabs).
-`-k <start>,<end>` sorts lines by fields from <start> to <end> (inclusive). E.g., `-k 1,1` sorts only by the first field (key), grouping identical keys together.
+
+- By default, `sort` splits each line into fields separated by whitespace (e.g., use `-t '\t'` for tabs).
+
+- `-k <start>,<end>` sorts lines by fields from <start> to <end> (inclusive). E.g., `-k 1,1` sorts only by the first field (key), grouping identical keys together.
 
 <br>
 
@@ -329,7 +331,6 @@ $ mapred streaming -libjars partitioner.jar  \
   -mapper "python mapper.py" -reducer "python reducer.py" \
   -combiner "python reducer.py" \
   -partitioner CustomPartitioner
-  
 ```
 
 <br>
