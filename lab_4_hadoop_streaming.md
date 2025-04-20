@@ -220,7 +220,11 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 Hadoop Streaming allows the use of custom partitioners, but it requires the partitioner to be implemented in Java.
 
 
-Note: You can skip step 1 by using a pre-compiled jar file.
+Note: You can skip step 1 by downloading a pre-compiled JAR.
+
+```shell
+wget https://github.com/justinjiajia/bigdata_lab_2025/raw/refs/heads/main/resources/partitioner.jar
+```
 
 ##  Step 1: Coding and compiling the custom Java Partitioner 
 
