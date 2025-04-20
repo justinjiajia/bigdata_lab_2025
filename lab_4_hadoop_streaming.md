@@ -188,10 +188,10 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 
 Note: 
 
-- `-D`: Set one Hadoop configuration property at a time
-- `-files`: Specify a comma-separated list of files (no spaces) to be copied to the cluster
+- `-D` sets one Hadoop configuration property at a time.
+- `-files` specifies a comma-separated list of files (no spaces) to be copied to the cluster.
 - `-D` and `-files` are generic options. They must appear before streaming-specific options such as `-input`, `-output`, `-mapper`, and `-reducer`.
-- `\`: Tell the shell this command continues on the next line. Without it, pressing Enter would execute the command immediately.
+- `\` at the end of each line tells the shell this command continues on the next line. Without it, pressing Enter would execute the command immediately.
 
 
 <br>
