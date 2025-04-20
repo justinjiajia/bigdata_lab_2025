@@ -151,7 +151,7 @@ if word == current_word:
 
 <br>
 
-## Step 2: Testing the programs locally (Optional)
+## Step 2: Testing the programs locally 
 
 First, create a local plain text file and populate it with several words:
 
