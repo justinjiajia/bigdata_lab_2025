@@ -222,13 +222,13 @@ Note: You can skip step 1 by using a pre-compiled jar file.
 
 ##  Step 1: Coding and compiling the custom Java Partitioner 
 
-
+Open a file named *CustomPartitioner.java*:
 
 ```shell
 nano CustomPartitioner.java
 ```
 
-Copy and paste the Java code snippet below into the file:
+Copy and paste the Java code below into the file:
 
 ```java
 import org.apache.hadoop.io.Text;
