@@ -184,6 +184,8 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
   -mapper mapper.py -reducer reducer.py
 ```
 
+Note: `-D` and `-files` are generic options. They must be specified before streaming options such as `-input`, `-output`, `-mapper`, and `-reducer`.
+
 <br>
 
 ## Step 4: Viewing the final output
@@ -301,7 +303,8 @@ $ mapred streaming -D mapreduce.framework.name=local \
   -partitioner CustomPartitioner
 ```
 
-The `file://` prefix above tells the local MapReduce run to read input from and write output to the local file system instead of HDFS.
+Note:  The `file://` prefix above tells the local MapReduce run to read input from and write output to the local file system instead of HDFS.
+`-libjars` is another example of generic options, and must be specified before streaming options.
 
 <br>
 
