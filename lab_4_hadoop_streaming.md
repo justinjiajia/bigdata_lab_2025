@@ -97,7 +97,7 @@ $ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 
 <br>
 
-## Mapper code
+### Mapper code
 
 ```shell
 nano mapper.py
@@ -120,7 +120,7 @@ for line in sys.stdin:
 
 <br>
 
-## Reducer code
+### Reducer code
 
 ```shell
 nano reducer.py
@@ -197,7 +197,7 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
   -mapper mapper.py -reducer reducer.py -combiner reducer.py
 ```
 
-
+<br>
 
 # USe Custom Partitioner (Optional)
 
