@@ -93,7 +93,7 @@ $ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 
 <br>
 
-## Create the program files for Mapper and Reducer
+## Step 1: Create the program files for Mapper and Reducer
 
 <br>
 
@@ -152,19 +152,30 @@ if word == current_word:
 
 <br>
 
-## Test the programs locally (Optional)
+## Step 2: Testing the programs locally (Optional)
 
+First, create a local plain text file and populate it with several words:
 
 ```shell
 $ echo -e "LAB\nA\nDATA1\na?\nbig.\nTHE\nlab\nintelligence\nanalytics\nThe\nBIG\ndata2\nan\nBusiness\nL.A.B." > input.txt
-$ cat input.txt | python ~/mapper.py | sort -k 1,1 | python ~/reducer.py
 ```
+
 
 Note: `-e` enables `echo` to interpret backslash escapes.
 
+Run a sequence of linux commands and Python scripts chained by the pipe operator `|`:
+
+```shell
+$ cat input.txt | python ~/mapper.py | sort -t -k 1,1 | python ~/reducer.py
+```
+
+Note: `sort` is a Linux command that sorts lines of text. Here, it emulates Hadoop's shuffle and sort phase locally.
+By default, `sort` splits each line into fields separated by whitespace (e.g., use `-t '\t'` for tabs).
+`-k <start>,<end>` sorts lines by fields from <start> to <end> (inclusive). E.g., `-k 1,1` sorts only by the first field (key), grouping identical keys together.
+
 <br>
 
-## Submit the job
+## Step 3: Submitting the job
 
 
 ```shell
@@ -176,7 +187,7 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 
 <br>
 
-## View the output
+## Step 4: Viewing the final output
 
 ```shell
 hadoop fs -cat /<Your ITSC Account>/program_output_1/part-* > combinedresult.txt
@@ -186,7 +197,7 @@ tail -n20 combinedresult.txt
 
 <br>
 
-## Use of combiners
+# Use of Combiners
 
 IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
@@ -199,13 +210,15 @@ $ mapred streaming -D mapreduce.job.reduces=2 \
 
 <br>
 
-# USe Custom Partitioner (Optional)
+# USe custom Partitioner (Optional)
 
+
+Hadoop Streaming allows the use of custom partitioners, but it requires the partitioner to be implemented in Java.
 
 
 Note: You can skip step 1 by using a pre-compiled jar file.
 
-##  Step 1: Code and compile the Custom Partitioner 
+##  Step 1: Coding and compiling the custom Java Partitioner 
 
 
 
@@ -254,25 +267,29 @@ public class CustomPartitioner implements Partitioner<Text, Text> {
 }
 ```
 
-Compile the Java file and pack the resulting *CustomPartitioner.class* file into a .jar file called *partitioner.jar*: 
+Compile the Java class and package it into a JAR called *partitioner.jar*: 
 
 ```shell
 $ javac -classpath $(hadoop classpath) CustomPartitioner.java
 $ jar -cf partitioner.jar CustomPartitioner*.class
 ```
 
+You can then view the content of *partitioner.jar* to make sure that the *.class* file is inside:
+
 ```shell
 $ jar -tf partitioner.jar
 ```
 
 
-## Step 2: Test the code locally
+## Step 2: Testing the custom Partitioner
 
-Since the partitioner is a Java class, we cannot test the code as before.
+Since the custom partitioner is implemented in Java, we cannot test it directly through CLI commands like we do with Python scripts. 
 
-Instead, we test it by forcing MapReduce to run locally using `mapreduce.framework.name=local`. 
+Instead, we’ll validate its behavior by running a local MapReduce job.
 
-### Submit a local MapReduce job
+This is configured by setting `-D mapreduce.framework.name=local`. 
+
+### Submitting a local MapReduce job
 
 IMPORTANT: Copy and paste the following code line by line.
 
@@ -289,7 +306,7 @@ The `file://` prefix above tells the local MapReduce run to read input from and 
 
 <br>
 
-### View the local output
+### Viewing the local output
 
 
 ```shell
@@ -301,7 +318,7 @@ $ cat output/part-00002
 
 <br>
 
-## Step 3: Submit the job
+## Step 3: Submitting the job
 
 ```shell
 $ mapred streaming -libjars partitioner.jar  \
@@ -313,7 +330,7 @@ $ mapred streaming -libjars partitioner.jar  \
   
 ```
 
-## Step 3: View the output
+## Step 4: Viewing the final output
 
 ```shell
 hadoop fs -cat /<Your ITSC Account>/program_output_3/part-00000 
