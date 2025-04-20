@@ -176,6 +176,7 @@ By default, `sort` splits each line into fields separated by whitespace (e.g., u
 
 ## Step 3: Submitting the job
 
+<span style="color : orangered">IMPORTANT: Copy and paste the following code line by line, including `\` at the end.</span>
 
 ```shell
 $ mapred streaming -D mapreduce.job.reduces=2 \
@@ -200,7 +201,7 @@ tail -n20 combinedresult.txt
 
 # Using Combiners
 
-<code style="color : orangered">IMPORTANT: Copy and paste the following code line by line, including `\` at the end.</code>
+<span style="color : orangered">IMPORTANT: Copy and paste the following code line by line, including `\` at the end.</span>
 
 
 ```shell
