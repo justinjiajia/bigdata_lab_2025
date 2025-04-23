@@ -107,23 +107,33 @@ Later, you can just copy and paste the commands to the terminal for execution
 Note that `hadoop fs` and `hdfs dfs` can be interchangeably used below.
 
 ```shell
-$ hadoop fs -df -h
+hadoop fs -df -h
+```
 
-$ hadoop fs -ls /
+```shell
+hadoop fs -ls /
+```
 
-$ hadoop fs -mkdir -p /<Your ITSC Account>
+```shell
+hadoop fs -mkdir -p /<Your ITSC Account>
+```
 
-$ hadoop fs -put data /<Your ITSC Account>
+```shell
+hadoop fs -put data /<Your ITSC Account>
+```
 
-$ hadoop fs -ls /<Your ITSC Account>/data
+```shell
+hadoop fs -ls /<Your ITSC Account>/data
+```
 
-$ hdfs dfs -df -h
+```shell
+hdfs dfs -df -h
 ```
 
 You can use a HDFS filesystem checking utility to get a file's block report, e.g.,
 
 ```shell
-$ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
+hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 ```
 
 <br>
@@ -134,14 +144,14 @@ $ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 Note that `hadoop jar` and `yarn jar` can be interchangeably used below.
 
 ```shell
-$ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount /<Your ITSC Account>/data /<Your ITSC Account>/wordcount_output
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount /<Your ITSC Account>/data /<Your ITSC Account>/wordcount_output
 ```
 
 We can use the `-D` flag to define a value for a property in the format of `property=value`.
 E.g., we can specify the number of reducers to use as follows:
 
 ```shell
-$ yarn jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount -D mapreduce.job.reduces=2  /<Your ITSC Account>/data /<Your ITSC Account>/wordcount_output_1
+yarn jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount -D mapreduce.job.reduces=2  /<Your ITSC Account>/data /<Your ITSC Account>/wordcount_output_1
 ```
 
 <br>
@@ -150,7 +160,13 @@ $ yarn jar /usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar wordcount -D 
 
 ```shell
 hadoop fs -cat /<Your ITSC Account>/wordcount_output/part-r-* > combinedresult.txt
+```
+
+```shell
 head -n20 combinedresult.txt
+```
+
+```shell
 tail -n20 combinedresult.txt
 ```
 
