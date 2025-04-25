@@ -31,8 +31,8 @@
             }
         },
         {
-          "classification": "hive-site",
-          "properties": {
+            "classification": "hive-site",
+            "properties": {
                 "hive.execution.engine": "mr"
           }
         }
