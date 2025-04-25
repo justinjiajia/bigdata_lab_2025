@@ -1,6 +1,14 @@
 
 # EMR settings
 
+- EMR release: 7.8.0
+
+- Application: Hadoop
+  
+- Primary instance: type: `m4.large`, quantity: 1
+
+- Core instance: type: `m4.large`, quantity: 3
+
 - Software configurations
     ```json
     [
