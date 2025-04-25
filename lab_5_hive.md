@@ -33,7 +33,7 @@
         {
           "classification": "hive-site",
           "properties": {
-            		"hive.execution.engine": "mr"
+                "hive.execution.engine": "mr"
           }
         }
     ]
