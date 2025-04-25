@@ -174,7 +174,7 @@ SELECT * FROM books LIMIT 5;
 
 ## Step 4: Aggregation Queries
 
-One MapReduce job is sufficient for a basic group-by:
+1 MapReduce job is sufficient for a basic group-by:
 
 ```sql
 SELECT YearOfPublication, COUNT(BookTitle) FROM books GROUP BY YearOfPublication LIMIT 20;
