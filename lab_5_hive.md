@@ -50,10 +50,10 @@
 # Data preparation
 
 ```shell
-nano data_prep.sh
+nano script.sh
 ```
 
-Copy and paste the code snippet below into the *data_prep.sh* file, and change all occurrences of `<Your ITSC Account>` to your ITSC account string. 
+Copy and paste the code snippet below into the *script.sh* file. 
 
 
 ```shell
