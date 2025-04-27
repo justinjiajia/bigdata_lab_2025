@@ -132,7 +132,8 @@ Note:
 Define a schema over raw data stored in HDFS — just like creating a virtual table you can query with SQL:
 
 ```sql
-create external table books(ISBN string, BookTitle string, BookAuthor string, YearOfPublication string, Publisher string, ImageURLS string, ImageURLM string, ImageURLL string) row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' with serdeproperties ("separatorChar" = ";", "quoteChar"= "\"");
+create external table books(ISBN string, BookTitle string, BookAuthor string, YearOfPublication string, Publisher string, ImageURLS string, ImageURLM string, ImageURLL string)
+row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' with serdeproperties ("separatorChar" = ";", "quoteChar"= "\"");
 ```
 
 Note:
@@ -183,7 +184,8 @@ SELECT YearOfPublication, COUNT(BookTitle) FROM books GROUP BY YearOfPublication
 To get the **top 20 most popular publication years**, sorted by book count (requires 2 MapReduce jobs):
 
 ```sql
-SELECT YearOfPublication, COUNT(BookTitle) AS NoOfBooks FROM books GROUP BY YearOfPublication ORDER BY NoOfBooks DESC LIMIT 20;
+SELECT YearOfPublication, COUNT(BookTitle) AS NoOfBooks FROM books
+GROUP BY YearOfPublication ORDER BY NoOfBooks DESC LIMIT 20;
 ```
 
 <br>
@@ -201,7 +203,8 @@ CREATE EXTERNAL TABLE YearBuckets (YearOfPublication STRING, count INT);
 Insert grouped data into this table:
 
 ```sql
-INSERT OVERWRITE TABLE YearBuckets SELECT YearOfPublication, COUNT(BookTitle) FROM books GROUP BY YearOfPublication;
+INSERT OVERWRITE TABLE YearBuckets
+SELECT YearOfPublication, COUNT(BookTitle) FROM books GROUP BY YearOfPublication;
 ```
 
 Hive will create a directory `/user/hive/warehouse/yearbuckets/` automatically to store the results.
