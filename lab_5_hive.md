@@ -132,7 +132,8 @@ Note:
 Define a schema over raw data stored in HDFS — just like creating a virtual table you can query with SQL:
 
 ```sql
-create external table books(ISBN string, BookTitle string, BookAuthor string, YearOfPublication string, Publisher string, ImageURLS string, ImageURLM string, ImageURLL string)
+create external table books
+(ISBN string, BookTitle string, BookAuthor string, YearOfPublication string, Publisher string, ImageURLS string, ImageURLM string, ImageURLL string)
 row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' with serdeproperties ("separatorChar" = ";", "quoteChar"= "\"");
 ```
 
