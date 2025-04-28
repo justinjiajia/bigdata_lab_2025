@@ -237,7 +237,9 @@ SELECT * from YearBuckets LIMIT 20;
 To find pairs of books published in the same year by the same publisher (and avoid duplicate pairs like A-B and B-A):
 
 ```sql
-SELECT t1.BookTitle, t2.BookTitle, t2.Publisher, t2.YearOfPublication FROM books t1 JOIN books t2 ON t1.Publisher = t2.Publisher AND t1.YearOfPublication = t2.YearOfPublication WHERE t1.BookTitle < t2.BookTitle LIMIT 10;
+SELECT t1.BookTitle, t2.BookTitle, t2.Publisher, t2.YearOfPublication
+FROM books t1 JOIN books t2 ON t1.Publisher = t2.Publisher AND t1.YearOfPublication = t2.YearOfPublication
+WHERE t1.BookTitle < t2.BookTitle LIMIT 10;
 ```
 
 ------
