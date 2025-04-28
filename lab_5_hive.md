@@ -273,7 +273,10 @@ dfs -ls /tmp/pairs;
 ### Option 2: Save Output to a Local Filesystem Directory
 
 ```sql
-INSERT OVERWRITE LOCAL DIRECTORY "pairs" ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' SELECT t1.BookTitle, t2.BookTitle, t2.Publisher, t2.YearOfPublication FROM books t1 JOIN books t2 ON t1.Publisher = t2.Publisher AND t1.YearOfPublication = t2.YearOfPublication WHERE t1.BookTitle < t2.BookTitle;
+INSERT OVERWRITE LOCAL DIRECTORY "pairs" ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT t1.BookTitle, t2.BookTitle, t2.Publisher, t2.YearOfPublication
+FROM books t1 JOIN books t2 ON t1.Publisher = t2.Publisher AND t1.YearOfPublication = t2.YearOfPublication
+WHERE t1.BookTitle < t2.BookTitle;
 ```
 
 You can confirm the output is saved using:
