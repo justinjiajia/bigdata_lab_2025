@@ -71,10 +71,10 @@ for line in sys.stdin:
     
 
     if values.startswith('|OUTLINKS|'):
-            outlinks = values.replace('|OUTLINKS|', '').split(',')
-            outlinks_str = ','.join(outlinks) if outlinks else ''
+        outlinks = values.replace('|OUTLINKS|', '').split(',')
+        outlinks_str = ','.join(outlinks) if outlinks else ''
     else:
-            contributions.append(float(part))
+        contributions.append(float(part))
         
        
     last_node = node
