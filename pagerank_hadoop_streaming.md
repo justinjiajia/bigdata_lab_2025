@@ -104,7 +104,7 @@ nano run_pagerank.sh
 # Configuration
 INPUT_PATH="/pagerank/input"
 OUTPUT_PREFIX="/pagerank/output_iter_"
-MAX_ITERATIONS=5  # Default stopping criterion
+MAX_ITERATIONS=10  # Default stopping criterion
 
 # Remove old outputs
 hadoop fs -rm -r ${OUTPUT_PREFIX}*
@@ -119,7 +119,7 @@ do
     fi
 
     # Run Hadoop Streaming job
-    mapred streaming \
+    mapred streaming -D mapreduce.input.fileinputformat.split.minsize=134217728 \   # create splits of at least 128 MB; otherwise, hadoop streaming will create 10+ splits
         -files mapper.py,reducer.py \
         -mapper "python mapper.py" \
         -reducer "python reducer.py" \
