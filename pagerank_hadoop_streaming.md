@@ -79,8 +79,7 @@ for line in sys.stdin:
         outlinks = value.replace('|OUTLINKS|', '').split(',')
         outlinks_str = ','.join(outlinks) if outlinks else ''
     else:
-        contributions.append(float(value))
-        
+        contributions.append(float(value))        
        
     last_node = node
 
