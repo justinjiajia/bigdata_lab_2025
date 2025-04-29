@@ -1,5 +1,5 @@
 
-### Data preparation
+### Data Preparation
 
 ```shell
 nano script.sh
@@ -14,7 +14,7 @@ hadoop fs -mkdir -p /pagerank/input
 hadoop fs -put pagerank.txt /pagerank/input
 ```
 
-### mapper.py
+### *mapper.py*
 
 ```shell
 nano mapper.py
@@ -47,7 +47,7 @@ for line in sys.stdin:
 ```
 
 
-### reducer.py
+### *reducer.py*
 
 
 ```shell
