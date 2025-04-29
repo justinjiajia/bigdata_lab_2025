@@ -1,4 +1,13 @@
 
+### Data File
+
+
+```
+A   0.3333   A,B
+B   0.3333   A,C
+C   0.3333   B
+```
+
 ### mapper.py
 
 ```shell
