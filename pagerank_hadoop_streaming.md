@@ -62,27 +62,26 @@ for line in sys.stdin:
     if not line:
         continue
 
-    node, values = line.split('\t', 1)
+    node, value = line.split('\t', 1)
 
     if last_node and last_node != node:
-        new_rank =  sum(contributions)
+        new_rank = sum(contributions)
         print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
         contributions = []
     
 
-    if values.startswith('|OUTLINKS|'):
-        outlinks = values.replace('|OUTLINKS|', '').split(',')
+    if value.startswith('|OUTLINKS|'):
+        outlinks = value.replace('|OUTLINKS|', '').split(',')
         outlinks_str = ','.join(outlinks) if outlinks else ''
     else:
-        contributions.append(float(part))
+        contributions.append(float(value))
         
        
     last_node = node
 
 if last_node:
-    new_rank =  sum(contributions)
+    new_rank = sum(contributions)
     print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
-    print(f"{last_key}\t{max_val}") 
 ```
 
 
