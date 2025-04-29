@@ -1,0 +1,122 @@
+
+### mapper.py
+
+```shell
+nano mapper.py
+```
+
+
+```python                                      
+#!/usr/bin/env python3
+import sys
+
+for line in sys.stdin:
+    line = line.strip()
+    if not line:
+        continue
+
+    # Parse input: <node_id> <current_rank> <outlinks>
+    parts = line.split()
+    node = parts[0]
+    current_rank = float(parts[1])
+    outlinks = parts[2].split(',') if len(parts) > 2 else []
+
+    # Emit contributions to all outlinks
+    if len(outlinks) > 0:
+        contribution = current_rank / len(outlinks)
+        for outlink in outlinks:
+            print(f"{outlink}\t{contribution:.10f}")
+
+    # Preserve the graph structure (pass outlinks to reducer)
+    print(f"{node}\t{'|OUTLINKS|' + ','.join(outlinks)}")
+```
+
+
+### reducer.py
+
+
+```shell
+nano reducer.py
+```
+
+
+
+```python                                        
+#!/usr/bin/env python3
+import sys
+
+d = 0.85
+N = 3  # Total nodes (adjust based on your graph)
+
+for line in sys.stdin:
+    line = line.strip()
+    if not line:
+        continue
+
+    node, values = line.split('\t', 1)
+    current_rank = 0.0
+    outlinks = []
+
+    # Split contributions and outlinks
+    contributions = []
+    for part in values.split('\t'):
+        if part.startswith('|OUTLINKS|'):
+            outlinks = part.replace('|OUTLINKS|', '').split(',')
+        else:
+            contributions.append(float(part))
+
+    # Compute new PageRank
+    sum_contributions = sum(contributions)
+    new_rank = (1 - d) / N + d * sum_contributions
+
+    # Emit updated rank and outlinks
+    outlinks_str = ','.join(outlinks) if outlinks else ''
+    print(f"{node}\t{new_rank:.10f}\t{outlinks_str}")
+```
+
+
+### Driver Script 
+
+```shell
+nano run_pagerank.sh 
+```
+
+
+```shell
+#!/bin/bash
+
+# Configuration
+INPUT_PATH="/pagerank/input"
+OUTPUT_PREFIX="/pagerank/output_iter_"
+MAX_ITERATIONS=3  # Default stopping criterion
+
+# Remove old outputs
+hadoop fs -rm -r ${OUTPUT_PREFIX}*
+
+# Run iterations
+for ((i=0; i<MAX_ITERATIONS; i++))
+do
+    echo "Iteration $i"
+    INPUT=$INPUT_PATH
+    if [ $i -ne 0 ]; then
+        INPUT="${OUTPUT_PREFIX}$((i-1))"
+    fi
+
+    # Run Hadoop Streaming job
+    mapred streaming \
+        -files mapper.py,reducer.py \
+        -mapper "python mapper.py" \
+        -reducer "python reducer.py" \
+        -input $INPUT \
+        -output "${OUTPUT_PREFIX}${i}"
+
+done
+
+echo "PageRank completed after $MAX_ITERATIONS iterations."
+```
+
+### run the script
+
+```shell
+sh run_pagerank.sh
+```
