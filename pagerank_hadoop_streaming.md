@@ -66,8 +66,7 @@ for line in sys.stdin:
             contributions.append(float(part))
 
     # Compute new PageRank
-    sum_contributions = sum(contributions)
-    new_rank = (1 - d) / N + d * sum_contributions
+    new_rank =  sum(contributions)
 
     # Emit updated rank and outlinks
     outlinks_str = ','.join(outlinks) if outlinks else ''
