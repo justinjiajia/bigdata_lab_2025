@@ -74,7 +74,6 @@ for line in sys.stdin:
         new_rank = sum(contributions)
         print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
         contributions = []
-    
 
     if value.startswith('|OUTLINKS|'):
         outlinks = value.replace('|OUTLINKS|', '').split(',')
