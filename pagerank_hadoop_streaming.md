@@ -46,6 +46,7 @@ nano reducer.py
 import sys
 
 N = 3  # Total nodes (adjust based on your graph)
+last_node, contributions = None, []
 
 for line in sys.stdin:
     line = line.strip()
@@ -53,23 +54,26 @@ for line in sys.stdin:
         continue
 
     node, values = line.split('\t', 1)
-    current_rank = 0.0
-    outlinks = []
 
-    # Split contributions and outlinks
-    contributions = []
-    for part in values.split('\t'):
-        if part.startswith('|OUTLINKS|'):
-            outlinks = part.replace('|OUTLINKS|', '').split(',')
-        else:
+    if last_node and last_node != node:
+        new_rank =  sum(contributions)
+        print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
+        contributions = []
+    
+
+    if values.startswith('|OUTLINKS|'):
+            outlinks = values.replace('|OUTLINKS|', '').split(',')
+            outlinks_str = ','.join(outlinks) if outlinks else ''
+    else:
             contributions.append(float(part))
+        
+       
+    last_node = node
 
-    # Compute new PageRank
+if last_node:
     new_rank =  sum(contributions)
-
-    # Emit updated rank and outlinks
-    outlinks_str = ','.join(outlinks) if outlinks else ''
-    print(f"{node}\t{new_rank:.10f}\t{outlinks_str}")
+    print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
+    print(f"{last_key}\t{max_val}") 
 ```
 
 
