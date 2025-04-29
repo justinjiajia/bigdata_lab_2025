@@ -1,11 +1,17 @@
 
-### Data File
+### Data preparation
 
-
+```shell
+nano script.sh
 ```
-A   0.3333   A,B
-B   0.3333   A,C
-C   0.3333   B
+
+```shell
+#!/bin/bash
+
+echo -e "A\t0.3333\tA,B\nB\t0.3333\tA,C\nC\t0.3333\tB" > pagerank.txt
+
+hadoop fs -mkdir -p /pagerank/input
+hadoop fs -put pagerank.txt /pagerank/input
 ```
 
 ### mapper.py
@@ -98,7 +104,7 @@ nano run_pagerank.sh
 # Configuration
 INPUT_PATH="/pagerank/input"
 OUTPUT_PREFIX="/pagerank/output_iter_"
-MAX_ITERATIONS=3  # Default stopping criterion
+MAX_ITERATIONS=5  # Default stopping criterion
 
 # Remove old outputs
 hadoop fs -rm -r ${OUTPUT_PREFIX}*
