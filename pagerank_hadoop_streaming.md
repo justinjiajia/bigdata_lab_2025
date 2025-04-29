@@ -45,7 +45,6 @@ nano reducer.py
 #!/usr/bin/env python3
 import sys
 
-d = 0.85
 N = 3  # Total nodes (adjust based on your graph)
 
 for line in sys.stdin:
