@@ -183,7 +183,7 @@ Note: `sort` is a Linux command that sorts lines of text. Here, it emulates Hado
 $ mapred streaming -D mapreduce.job.reduces=2 \
   -files mapper.py,reducer.py \
   -input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_1 \
-  -mapper mapper.py -reducer reducer.py
+  -mapper "python mapper.py" -reducer "python reducer.py"
 ```
 
 Note: 
@@ -215,7 +215,7 @@ tail -n20 combinedresult.txt
 $ mapred streaming -D mapreduce.job.reduces=2 \
   -files mapper.py,reducer.py \
   -input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_2 \
-  -mapper mapper.py -reducer reducer.py -combiner reducer.py
+  -mapper "python mapper.py" -reducer "python reducer.py" -combiner "python reducer.py"
 ```
 
 <br>
