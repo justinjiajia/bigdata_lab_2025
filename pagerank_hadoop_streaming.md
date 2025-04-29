@@ -1,5 +1,5 @@
 
-### Data Preparation
+### Data preparation
 
 ```shell
 nano script.sh
@@ -91,7 +91,7 @@ if last_node:
 ```
 
 
-### Driver Script 
+### Driver script 
 
 ```shell
 nano run_pagerank.sh 
@@ -131,7 +131,7 @@ done
 echo "PageRank completed after $MAX_ITERATIONS iterations."
 ```
 
-### run the script
+### Run the script
 
 ```shell
 sh run_pagerank.sh
