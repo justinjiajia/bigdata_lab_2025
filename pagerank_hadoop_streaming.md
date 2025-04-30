@@ -132,7 +132,7 @@ echo "PageRank completed after $MAX_ITERATIONS iterations."
 
 Note:
 
--  `mapreduce.input.fileinputformat.split.minsize=134217728` creates splits of at least 128 MB; otherwise, Hadoop streaming will create 10+ splits
+-  `mapreduce.input.fileinputformat.split.minsize=134217728` creates splits of at least 128 MB; otherwise, Hadoop streaming will create 10+ splits and consequently spawn 10+ mapper tasks at each iteration.
 
 ### Run the script
 
