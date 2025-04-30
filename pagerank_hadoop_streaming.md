@@ -113,7 +113,7 @@ do
         INPUT="${OUTPUT_PREFIX}$((i-1))"
     fi
 
-    # emulate mapreduce locally
+    # Emulate MapReduce locally
     mkdir ${OUTPUT_PREFIX}${i}
     cat ${INPUT}/* | python ~/mapper.py |  sort -k 1,1  | python ~/reducer.py > "${OUTPUT_PREFIX}${i}/pagerank.txt"
 
