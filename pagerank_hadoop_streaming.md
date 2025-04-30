@@ -102,7 +102,7 @@ OUTPUT_PREFIX="pagerank/output_iter_"
 MAX_ITERATIONS=10  # Default stopping criterion
 
 # Remove old outputs
-hadoop fs -rm -r ${OUTPUT_PREFIX}*
+rm -r ${OUTPUT_PREFIX}*
 
 # Run iterations
 for ((i=0; i<MAX_ITERATIONS; i++))
