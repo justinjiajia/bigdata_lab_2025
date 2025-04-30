@@ -118,7 +118,7 @@ do
     fi
 
     # Run Hadoop Streaming job
-    mapred streaming -D mapreduce.input.fileinputformat.split.minsize=134217728 \   # create splits of at least 128 MB; otherwise, hadoop streaming will create 10+ splits
+    mapred streaming -D mapreduce.input.fileinputformat.split.minsize=134217728 \
         -files mapper.py,reducer.py \
         -mapper "python mapper.py" \
         -reducer "python reducer.py" \
@@ -129,6 +129,10 @@ done
 
 echo "PageRank completed after $MAX_ITERATIONS iterations."
 ```
+
+Note:
+
+-  `mapreduce.input.fileinputformat.split.minsize=134217728` creates splits of at least 128 MB; otherwise, Hadoop streaming will create 10+ splits
 
 ### Run the script
 
