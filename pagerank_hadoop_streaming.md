@@ -15,7 +15,9 @@ cp pagerank.txt pagerank/input
 hadoop fs -mkdir -p /pagerank/input
 hadoop fs -put pagerank.txt /pagerank/input
 ```
-
+```shell
+sh script.sh
+```
 ### *mapper.py*
 
 ```shell
@@ -92,6 +94,10 @@ if last_node:
 ```
 
 ## Local testing script
+
+```shell
+nano local_test.sh
+```
 
 ```shell
 #!/bin/bash
