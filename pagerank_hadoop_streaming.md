@@ -9,6 +9,8 @@ nano script.sh
 #!/bin/bash
 
 echo -e "A\t0.3333\tA,B\nB\t0.3333\tA,C\nC\t0.3333\tB" > pagerank.txt
+mkdir pagerank
+cp pagerank.txt pagerank
 
 hadoop fs -mkdir -p /pagerank/input
 hadoop fs -put pagerank.txt /pagerank/input
@@ -88,6 +90,38 @@ if last_node:
     new_rank = sum(contributions)
     print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
 ```
+
+## Local testing script
+
+```shell
+#!/bin/bash
+
+# Configuration
+INPUT_PATH="pagerank/input"
+OUTPUT_PREFIX="pagerank/output_iter_"
+MAX_ITERATIONS=10  # Default stopping criterion
+
+# Remove old outputs
+hadoop fs -rm -r ${OUTPUT_PREFIX}*
+
+# Run iterations
+for ((i=0; i<MAX_ITERATIONS; i++))
+do
+    echo "Iteration $i"
+    INPUT=$INPUT_PATH
+    if [ $i -ne 0 ]; then
+        INPUT="${OUTPUT_PREFIX}$((i-1))"
+    fi
+
+    # emulate mapreduce locally
+    mkdir ${OUTPUT_PREFIX}${i}
+    cat ${INPUT}/* | python ~/mapper.py |  sort -k 1,1  | python ~/reducer.py > "${OUTPUT_PREFIX}${i}/pagerank.txt"
+
+done
+
+echo "PageRank completed after $MAX_ITERATIONS iterations."
+```
+
 
 
 ### Driver script 
