@@ -10,7 +10,7 @@ nano script.sh
 
 echo -e "A\t0.3333\tA,B\nB\t0.3333\tA,C\nC\t0.3333\tB" > pagerank.txt
 mkdir -p pagerank/input
-cp pagerank.txt pagerank
+cp pagerank.txt pagerank/input
 
 hadoop fs -mkdir -p /pagerank/input
 hadoop fs -put pagerank.txt /pagerank/input
