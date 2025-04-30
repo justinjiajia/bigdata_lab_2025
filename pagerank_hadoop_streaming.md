@@ -74,7 +74,7 @@ for line in sys.stdin:
     node, value = line.split('\t', 1)
 
     if last_node and last_node != node:
-        new_rank = d * sum(contributions) + (1 - d) / N
+        new_rank = sum(contributions) * d + (1 - d) / N
         print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
         contributions = []
 
@@ -82,12 +82,12 @@ for line in sys.stdin:
         outlinks = value.replace('|OUTLINKS|', '').split(',')
         outlinks_str = ','.join(outlinks) if outlinks else ''
     else:
-        contributions.append(float(value))        
-       
+	contributions.append(float(value))
+
     last_node = node
 
 if last_node:
-    new_rank = sum(contributions)
+    new_rank = sum(contributions) * d +	(1 - d)	/ N
     print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
 ```
 
