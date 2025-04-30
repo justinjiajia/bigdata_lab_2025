@@ -213,10 +213,11 @@ tail -n20 combinedresult.txt
 
 
 ```shell
-$ mapred streaming -D mapreduce.job.reduces=2 \
-  -files mapper.py,reducer.py \
-  -input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_2 \
-  -mapper "python mapper.py" -reducer "python reducer.py" -combiner "python reducer.py"
+mapred streaming -D mapreduce.input.fileinputformat.split.minsize=134217728 \   # create splits of at least 128 MB; otherwise, hadoop streaming will create 10+ splits
+-D mapreduce.job.reduces=2 \
+-files mapper.py,reducer.py \
+-input /<Your ITSC Account>/data -output /<Your ITSC Account>/program_output_2 \
+-mapper "python mapper.py" -reducer "python reducer.py" -combiner "python reducer.py"
 ```
 
 <br>
