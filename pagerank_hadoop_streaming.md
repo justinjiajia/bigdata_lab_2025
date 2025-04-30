@@ -60,6 +60,7 @@ nano reducer.py
 #!/usr/bin/env python3
 import sys
 
+d = 0.85  # Damping factor
 N = 3  # Total nodes (adjust based on your graph)
 last_node, contributions = None, []
 
@@ -71,7 +72,7 @@ for line in sys.stdin:
     node, value = line.split('\t', 1)
 
     if last_node and last_node != node:
-        new_rank = sum(contributions)
+        new_rank = d * sum(contributions) + (1 - d) / N
         print(f"{last_node}\t{new_rank:.10f}\t{outlinks_str}")
         contributions = []
 
