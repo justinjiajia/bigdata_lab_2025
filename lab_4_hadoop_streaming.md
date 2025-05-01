@@ -84,7 +84,7 @@ This allows you to do all the local and HDFS file system operations in one go.
 Then, you can use a HDFS filesystem checking utility to get a file's block report, e.g.,
 
 ```shell
-$ hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
+hdfs fsck /<Your ITSC Account>/data/nytimes.txt -files -blocks -locations
 ```
 
 <br>
@@ -286,14 +286,14 @@ public class CustomPartitioner implements Partitioner<Text, Text> {
 Compile the Java class and package it into a JAR called *partitioner.jar*: 
 
 ```shell
-$ javac -classpath $(hadoop classpath) CustomPartitioner.java
-$ jar -cf partitioner.jar CustomPartitioner*.class
+javac -classpath $(hadoop classpath) CustomPartitioner.java
+jar -cf partitioner.jar CustomPartitioner*.class
 ```
 
 You can then view the content of *partitioner.jar* to make sure that the *.class* file is inside:
 
 ```shell
-$ jar -tf partitioner.jar
+jar -tf partitioner.jar
 ```
 
 <br>
@@ -311,12 +311,12 @@ This is configured by setting `-D mapreduce.framework.name=local`.
 ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) IMPORTANT: Copy and paste the following code line by line, including `\` at the end.
 
 ```shell
-$ mapred streaming -D mapreduce.framework.name=local \
-  -libjars partitioner.jar  \
-  -files mapper.py,reducer.py,partitioner.jar \
-  -input file://$(pwd)/input.txt -output file://$(pwd)/output \
-  -mapper "python mapper.py" -reducer "python reducer.py" \
-  -partitioner CustomPartitioner
+mapred streaming -D mapreduce.framework.name=local \
+-libjars partitioner.jar  \
+-files mapper.py,reducer.py,partitioner.jar \
+-input file://$(pwd)/input.txt -output file://$(pwd)/output \
+-mapper "python mapper.py" -reducer "python reducer.py" \
+-partitioner CustomPartitioner
 ```
 
 Note:
@@ -329,10 +329,10 @@ Note:
 
 
 ```shell
-$ ls output
-$ cat output/part-00000
-$ cat output/part-00001
-$ cat output/part-00002
+ls output
+cat output/part-00000
+cat output/part-00001
+cat output/part-00002
 ```
 
 <br>
