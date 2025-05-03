@@ -64,7 +64,7 @@ pyspark --master yarn --deploy-mode client
 ## PySpark code to run sequentially
 
 ```python
-transactions = sc.textFile("hdfs:///justinjia/input/transactions.txt")  # absolute path of the input file on HDFS
+transactions = sc.textFile("hdfs:///<Your ITSC Account>/input/transactions.txt")  # absolute path of the input file on HDFS
 
 from itertools import combinations
 
