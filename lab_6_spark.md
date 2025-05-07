@@ -16,12 +16,6 @@
         "properties": {
           "hadoop.http.staticuser.user": "hadoop"
         }
-      },
-      {
-        "classification": "hive-site",
-        "properties": {
-          "hive.execution.engine": "mr"
-        }
       }
     ]
     ```
