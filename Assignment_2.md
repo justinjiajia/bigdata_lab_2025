@@ -118,3 +118,8 @@ If your output is saved in */output* on HDFS, you can use the command below to s
 hadoop fs -cat /output/* | head -n10
 ```
 
+
+#### Your submission should include both the code and the screenshot of the final output.
+
+![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) IMPORTANT: After using EMR, remember to terminate your EMR cluster.
+
