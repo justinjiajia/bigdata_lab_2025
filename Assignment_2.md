@@ -28,7 +28,7 @@ Despite this directional nature, our recommendation approach remains unaffected:
 
 For simplicity, you may still recommend these pairs even if one user has already declared the other as a friend (no need to filter out existing one-way connections).
 
-[*tiny_social_data.txt*](https://github.com/justinjiajia/datafiles/blob/main/tiny_social_data.txt) stores a tiny portion of this dataset:
+[*tiny_social_data.txt*](https://github.com/justinjiajia/datafiles/blob/main/tiny_social_data.txt) stores a tiny portion of *soc-LiveJournal1Adj.txt*:
 
 ```
 46133
