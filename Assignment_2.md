@@ -20,7 +20,7 @@ hadoop fs -df -h /input
 hadoop fs -ls /input
 ```
 
-Betweem the 2 datasets, the [*soc-LiveJournal1Adj.txt*](https://snap.stanford.edu/data/soc-LiveJournal1.html) dataset represents the social network structure of LiveJournal users as an adjacency list. Unlike mutual friendships in Assignment 1, LiveJournal allows one-way friendship declarations - user A can declare user B as a friend without requiring B to reciprocate.
+Betweem the 2 datasets, the [*soc-LiveJournal1Adj.txt*](https://snap.stanford.edu/data/soc-LiveJournal1.html) dataset represents the social network structure of 50,000 LiveJournal users as an adjacency list. Unlike mutual friendships in Assignment 1, LiveJournal allows one-way friendship declarations - user A can declare user B as a friend without requiring B to reciprocate.
 
 Despite this directional nature, our recommendation approach remains unaffected: If two users appear together in the declaration lists of many other users, they are likely to be friends and we should remcommend them to declare each other as friends.
 
@@ -73,12 +73,35 @@ The record
 means user 46134 has declared 3 friends. 
 
 
-Note that there're users who haven't declare any friends. There are also users who have declared only one friend. They should all be dropped from subsequent processing.
+Note that there're users who haven't declare any friends. They should be dropped from subsequent processing.
 
 
-# 2 Run PySpark on Yarn via shell
+**Output Specification**
 
-## Start the shell
+The output must contain one line per user in the following format:
+
+```
+(<User_ID>,	[(Recommended_User1, Shared_Friends_Count1), (Recommended_User2, Shared_Friends_Count2), ...])
+```
+
+So each line starts with a user ID, followed by exactly 5 recommendation tuples (or fewer if not enough candidates exist)
+
+Each tuple contains: 
+
+- `Recommended_User`: The suggested friend's ID;
+  
+- `Shared_Friends_Count`: Number of users who declared both this user and the recommended user as friends;
+
+
+Tuples must be sorted in descending order by `Shared_Friends_Count`; Only include the top 5 recommendations (or all available if <5 exist)
+
+
+**Note**: Make sure your code works on *tiny_social_data.txt* before you run it on the entire dataset.
+
+ 
+
+
+## Start the PySpark shell
 
 ```shell
 pyspark --master yarn
