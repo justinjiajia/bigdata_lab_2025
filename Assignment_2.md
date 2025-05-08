@@ -73,7 +73,10 @@ The record
 means user 46134 has declared 3 friends. 
 
 
-Note that there're users who haven't declare any friends. They should be dropped from subsequent processing.
+Note: 
+
+- User IDs in each list are not in sorted order. 
+- There're users who haven't declare any friends. They should be dropped from subsequent processing.
 
 
 **Output Specification**
