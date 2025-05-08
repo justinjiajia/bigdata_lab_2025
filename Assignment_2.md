@@ -11,5 +11,6 @@ echo -e "0\t1,9,3,6,8,2\n1\t0,9,5\n2\t9,0\n3\t7,0,5,9,4\n4\t3,8\n5\t1,3,8,6\n6\t
 
 hadoop fs -mkdir /input
 hadoop fs -put soc-LiveJournal1Adj.txt /input
+hadoop fs -put toydata.txt /input
 hadoop fs -df -h /input
 ```
