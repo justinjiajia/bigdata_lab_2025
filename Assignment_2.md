@@ -24,7 +24,8 @@ Betweem the 2 datasets, the [*soc-LiveJournal1Adj.txt*](https://snap.stanford.ed
 
 Despite this directional nature, our recommendation approach remains unaffected: If two users appear together in the declaration lists of many other users, they are likely to be friends and we should remcommend them to declare each other as friends.
 
-Implementation Note:
+**Implementation Note**:
+
 For simplicity, you may still recommend these pairs even if one user has already declared the other as a friend (no need to filter out existing one-way connections).
 
 [*tiny_social_data.txt*](https://github.com/justinjiajia/datafiles/blob/main/tiny_social_data.txt) stores a tiny portion of this dataset:
