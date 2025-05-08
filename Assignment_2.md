@@ -110,3 +110,11 @@ Tuples must be sorted in descending order by `Shared_Friends_Count`; Only includ
 pyspark --master yarn
 ```
 
+## Show the output
+
+If your output is saved in */output* on HDFS, you can use the command below to show the first 10 recommendation lists.
+
+```shell
+hadoop fs -cat /output/* | head -n10
+```
+
