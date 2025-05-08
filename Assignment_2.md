@@ -20,7 +20,7 @@ hadoop fs -df -h /input
 hadoop fs -ls /input
 ```
 
-Betweem the 2 datasets, the [*soc-LiveJournal1Adj.txt*](https://snap.stanford.edu/data/soc-LiveJournal1.html) dataset represents the social network structure of 50,000 LiveJournal users as an adjacency list. Unlike mutual friendships in Assignment 1, LiveJournal allows one-way friendship declarations - user A can declare user B as a friend without requiring B to reciprocate.
+Betweem the 2 datasets, the [*soc-LiveJournal1Adj.txt*](https://snap.stanford.edu/data/soc-LiveJournal1.html) dataset represents the social network structure of 50,000 LiveJournal users. Unlike mutual friendships in Assignment 1, LiveJournal allows one-way friendship declarations - user A can declare user B as a friend without requiring B to reciprocate.
 
 Despite this directional nature, our recommendation approach remains unaffected: If two users appear together in the declaration lists of many other users, they are likely to be friends and we should remcommend them to declare each other as friends.
 
