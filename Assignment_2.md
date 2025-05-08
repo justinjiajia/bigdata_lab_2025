@@ -73,7 +73,7 @@ The record
 means user 46134 has declared 3 friends. 
 
 
-Note that there're users who haven't declare any friends. There are also users who have declared only one friend. They all should be dropped from subsequent processing.
+Note that there're users who haven't declare any friends. There are also users who have declared only one friend. They should all be dropped from subsequent processing.
 
 
 # 2 Run PySpark on Yarn via shell
