@@ -13,4 +13,5 @@ hadoop fs -mkdir /input
 hadoop fs -put soc-LiveJournal1Adj.txt /input
 hadoop fs -put toydata.txt /input
 hadoop fs -df -h /input
+hadoop fs -ls /input
 ```
