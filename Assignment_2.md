@@ -84,7 +84,7 @@ Note:
 The output must contain one line per user in the following format:
 
 ```
-(<User_ID>,	[(Recommended_User1, Shared_Friends_Count1), (Recommended_User2, Shared_Friends_Count2), ...])
+(<User_ID>, [(Recommended_User1, Shared_Friends_Count1), (Recommended_User2, Shared_Friends_Count2), ...])
 ```
 
 So each line starts with a user ID, followed by exactly 5 recommendation tuples (or fewer if not enough candidates exist)
