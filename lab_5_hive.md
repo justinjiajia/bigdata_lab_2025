@@ -78,8 +78,7 @@ tail -n+180001 books.csv > books/part-3
 
 # Load the data to the default warehouse directory in HDFS
 hdfs dfs -put books /user/hive/warehouse/
-hdfs dfs -cat /user/hive/warehouse/books/* | head
-hdfs dfs -df -h
+hdfs dfs -df -h /user/hive/warehouse/books
 ```
 
 
