@@ -32,7 +32,7 @@
 
 ### Accessing JupyterHub 
 
-Once the cluster is ready, switch to the Applications tab and copy and paste the URL for JupyterHub into the location bar of your browser.
+Once the cluster is ready, switch to the Applications tab. Click the URL to open JupyterHub in a new browser tab:
  
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/7fecd488-f655-4fdd-9b14-574f669660d3" />
 
@@ -91,7 +91,16 @@ tail -n+180001 books.csv > books/part-3
 # Load the data to the default warehouse directory in HDFS
 hdfs dfs -put books /user/hive/warehouse/
 hdfs dfs -ls /user/hive/warehouse/books
+
+# Add the user `livy` to the group `hdfsadmingroup` in the Linux system
+# without affecting `livy`'s existing group memberships (thanks to `-a`)
+sudo usermod -aG hdfsadmingroup livy
 ```
+
+
+- When using Jupyter (a non-Spark client), interactions with the Spark cluster are mediated through Livy, which acts as a REST server. Livy submits Spark jobs on behalf of the user.
+
+- Livy runs under its own Linux user (typically livy). For it to write to HDFS, it needs appropriate permissions in HDFS (not just Linux).
 
 ### Spark Programming
 
