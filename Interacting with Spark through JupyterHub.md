@@ -185,6 +185,9 @@ spark.catalog.listDatabases()
 spark.catalog.listTables()
 ```
 
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/689a0af3-2cac-4d3a-866c-b05693f5da2f" />
+
+
 This saves the Spark DataFrame as a Hive table:
 
  
