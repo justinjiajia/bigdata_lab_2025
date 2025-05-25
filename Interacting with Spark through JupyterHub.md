@@ -110,7 +110,6 @@ The following code checks whether `livy` has permission to write to HDFS:
 # Check groups for livy
 groups livy
 ```
-outputs:
 ```
 livy : livy hadoop hdfsadmingroup
 ```
