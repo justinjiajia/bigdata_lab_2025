@@ -104,7 +104,8 @@ sudo usermod -aG hdfsadmingroup livy
 - Livy runs under its own Linux user (typically `livy`). For it to write to HDFS, it needs appropriate permissions in HDFS.
 
 
-Now running 
+The following code checks whether `livy` has permission to write to HDFS:
+
 ```shell
 # Check groups for livy
 groups livy
@@ -114,7 +115,7 @@ outputs:
 livy : livy hadoop hdfsadmingroup
 ```
 
-These are the groups the user livy belongs to in the Linux system:
+This indicates the groups that the user `livy` belongs to in the Linux system:
 
 - `livy`: The user’s primary group (created by default when the user livy was added to the system).
 
@@ -122,7 +123,7 @@ These are the groups the user livy belongs to in the Linux system:
 
 - `hdfsadmingroup`: Another secondary group (created manually to manage HDFS permissions).
 
-Now you're able to write your data analysis result on HDFS with the following code:
+Now we're able to write your data analysis result on HDFS with the following code:
 
 ```Python
 output_rdd.saveAsTextFile("hdfs:///output")
