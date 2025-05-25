@@ -263,9 +263,7 @@ hive> quit;
 ``` 
 
 
-Another convenient tool for executing Spark SQL queries is the spark-sql shell. 
-
-Executing the following command starts the Spark SQL shell
+Another convenient tool for executing Spark SQL queries is the spark-sql shell. Executing the following command starts the Spark SQL shell:
 
 ```shell
 [hadoop@ip-172-31-77-215 ~]$ spark-sql
