@@ -93,6 +93,8 @@ hdfs dfs -put books /user/hive/warehouse/
 hdfs dfs -ls /user/hive/warehouse/books
 ```
 
+### Spark Programming
+
 ```python
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.master("yarn-client") \
