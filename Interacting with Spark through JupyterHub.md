@@ -123,7 +123,7 @@ This indicates the groups that the user `livy` belongs to in the Linux system:
 
 - `hdfsadmingroup`: Another secondary group (created manually to manage HDFS permissions).
 
-Now we're able to write your data analysis result on HDFS with the following code:
+We can now write data analysis results to HDFS using the following code at the end of a Spark program:
 
 ```Python
 output_rdd.saveAsTextFile("hdfs:///output")
