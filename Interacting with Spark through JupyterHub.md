@@ -30,7 +30,7 @@
     
 - Add a security rule that allows visititing the master node via a browser.
 
-
+### Accessing JupyterHub 
 
 Once the cluster is ready, switch to the Applications tab and copy and paste the URL for JupyterHub into the location bar of your browser.
  
@@ -54,13 +54,9 @@ Click PySpark. It will open a Juypter Notebook with PySpark already set up.
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/683c9121-dc36-427d-aea5-4cfc9df5a713" />
 
 
+### Data Preparation
 
-
-<img width="1409" alt="image" src="https://github.com/justinjiajia/bigdata_lab/assets/8945640/74a924d5-2c13-4fc9-b82a-7e9fe85a20b8">
-
-No containers are allocated until we run some Python code in a notebook cell.
-
-<br>
+ 
 
 
 ```shell
