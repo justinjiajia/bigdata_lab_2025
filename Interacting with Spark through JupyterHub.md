@@ -101,7 +101,7 @@ sudo usermod -aG hdfsadmingroup livy
 
 - When using Jupyter (a non-Spark client), interactions with the Spark cluster are mediated through Livy, which acts as a REST server. Livy submits Spark jobs on behalf of the user.
 
-- Livy runs under its own Linux user (typically `livy`). For it to write to HDFS, it needs appropriate permissions in HDFS (not just Linux).
+- Livy runs under its own Linux user (typically `livy`). For it to write to HDFS, it needs appropriate permissions in HDFS.
 
 
 Now running 
