@@ -176,7 +176,7 @@ flight_df = flight_df.withColumnRenamed('DEST_COUNTRY_NAME', 'destination') \
                      .withColumnRenamed('COUNT', 'count')
 
 from pyspark.sql.functions import avg
-flight_df.groupBy('origin').agg(avg('count').alias('outbound_avg')).show(50)
+flight_df.groupBy('origin').agg(avg('count').alias('outbound_avg')).show(20)
 ```
 
 ```python
