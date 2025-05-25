@@ -158,15 +158,23 @@ sc.getConf().getAll()
 ```
 
 ```python
-spark.conf.get("spark.sql.warehouse.dir")
 spark.conf.get("spark.submit.deployMode")
 ```
 
-
 ```
-'hdfs://ip-172-31-72-16.ec2.internal:8020/user/spark/warehouse'
 'cluster'
 ```
+
+Configurations relevent to Hive integration:
+
+```python
+# Hive support is enabled by default. Hive configurations have been loaded from hive-site.xml (/etc/hive/conf)
+# Specifies the catalog implementation. Set to hive to use Hive's metastore for table metadata management
+spark.conf.get("spark.sql.catalogImplementation")
+
+spark.conf.get("spark.sql.warehouse.dir")
+```
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/d752eb37-306f-40fe-8b13-29cdaab3e51f" />
 
 ```python
 flight_df = spark.read.options(header=True, inferSchema=True).csv('hdfs:///input/flight-2015-summary.csv')
