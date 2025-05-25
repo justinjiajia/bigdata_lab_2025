@@ -170,6 +170,8 @@ spark.sql("drop table if exists books;")
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/53f0b024-91c7-4714-8bc5-f9e9251d66e7" />
 
 
+We can also interact with this table from within the Hive shell.
+
 ```shell
 hive -hiveconf hive.execution.engine='tez'
 ```
