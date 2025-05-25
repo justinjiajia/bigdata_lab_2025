@@ -165,7 +165,7 @@ spark.conf.get("spark.submit.deployMode")
 'cluster'
 ```
 
-Configurations relevent to Hive integration:
+The configurations relevent to Hive integration include:
 
 ```python
 # Hive support is enabled by default. Hive configurations have been loaded from hive-site.xml (/etc/hive/conf)
@@ -174,7 +174,7 @@ spark.conf.get("spark.sql.catalogImplementation")
 
 spark.conf.get("spark.sql.warehouse.dir")
 ```
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/d752eb37-306f-40fe-8b13-29cdaab3e51f" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/d752eb37-306f-40fe-8b13-29cdaab3e51f" />
 
 ```python
 flight_df = spark.read.options(header=True, inferSchema=True).csv('hdfs:///input/flight-2015-summary.csv')
