@@ -225,7 +225,6 @@ spark.sql("""CREATE EXTERNAL TABLE IF NOT EXISTS books (ISBN string, title strin
              row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' with serdeproperties ('separatorChar' = ';', 'quoteChar'= '\"')
              LOCATION '/user/hive/warehouse/books';""")
 spark.sql("SHOW TABLES").show()
-spark.sql("drop table if exists books;")
 ```
 
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/53f0b024-91c7-4714-8bc5-f9e9251d66e7" />
@@ -264,4 +263,49 @@ hive> quit;
 ``` 
 
 
+Another convenient tool for executing Spark SQL queries is the spark-sql shell. 
 
+Executing the following command starts the Spark SQL shell
+
+```shell
+[hadoop@ip-172-31-77-215 ~]$ spark-sql
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+25/05/25 16:55:58 WARN HiveConf: HiveConf of name hive.server2.thrift.url does not exist
+25/05/25 16:56:01 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+Spark Web UI available at http://ip-172-31-77-215.ec2.internal:4040
+Spark master: yarn, Application Id: application_1748186428289_0002
+spark-sql (default)> select * from flight_table limit 20;
+United States	Romania	15
+United States	Croatia	1
+United States	Ireland	344
+Egypt	United States	15
+United States	India	62
+United States	Singapore	1
+United States	Grenada	62
+Costa Rica	United States	588
+Senegal	United States	40
+Moldova	United States	1
+United States	Sint Maarten	325
+United States	Marshall Islands	39
+Guyana	United States	64
+Malta	United States	1
+Anguilla	United States	41
+Bolivia	United States	30
+United States	Paraguay	6
+Algeria	United States	4
+Turks and Caicos Islands	United States	230
+United States	Gibraltar	1
+Time taken: 9.087 seconds, Fetched 20 row(s)
+spark-sql (default)> show tables;
+books
+flight_table
+Time taken: 2.42 seconds, Fetched 2 row(s)
+spark-sql (default)> exit;
+```
+
+Drop the books table:
+
+```shell
+spark.sql("drop table if exists books;")
+```
