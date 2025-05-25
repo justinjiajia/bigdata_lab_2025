@@ -165,6 +165,15 @@ spark.conf.get("spark.submit.deployMode")
 'cluster'
 ```
 
+View only the Spark SQL–specific Spark configurations:
+
+```python
+spark.sql("SET -v").select("key", "value").show(truncate=False)
+```
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/38315492-4d77-4b4d-bff5-534f201da8ba" />
+
+
+
 The configurations relevent to Hive integration include:
 
 ```python
