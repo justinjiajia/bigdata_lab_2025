@@ -136,9 +136,9 @@ spark.catalog.listTables()
 
 This saves the Spark DataFrame as a Hive table:
 
-![image](https://github.com/user-attachments/assets/a84f9a4e-f6e9-49e6-a583-fbf95ae4f857)
+ 
 
-
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/a84f9a4e-f6e9-49e6-a583-fbf95ae4f857" />
 
 
 ```python
@@ -166,7 +166,8 @@ spark.sql("""CREATE EXTERNAL TABLE IF NOT EXISTS books (ISBN string, title strin
 spark.sql("SHOW TABLES").show()
 spark.sql("drop table if exists books;")
 ```
-<img width="908" alt="image" src="https://github.com/user-attachments/assets/53f0b024-91c7-4714-8bc5-f9e9251d66e7" />
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/53f0b024-91c7-4714-8bc5-f9e9251d66e7" />
 
 
 ```shell
