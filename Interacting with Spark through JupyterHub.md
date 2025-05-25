@@ -94,14 +94,55 @@ hdfs dfs -ls /user/hive/warehouse/books
 
 # Add the user `livy` to the group `hdfsadmingroup` in the Linux system
 # without affecting `livy`'s existing group memberships (thanks to `-a`)
+# this allows writing the result of a Spark program back to HDFS
 sudo usermod -aG hdfsadmingroup livy
 ```
 
 
 - When using Jupyter (a non-Spark client), interactions with the Spark cluster are mediated through Livy, which acts as a REST server. Livy submits Spark jobs on behalf of the user.
 
-- Livy runs under its own Linux user (typically livy). For it to write to HDFS, it needs appropriate permissions in HDFS (not just Linux).
+- Livy runs under its own Linux user (typically `livy`). For it to write to HDFS, it needs appropriate permissions in HDFS (not just Linux).
 
+
+Now running 
+```shell
+# Check groups for livy
+groups livy
+```
+outputs:
+```
+livy : livy hadoop hdfsadmingroup
+```
+
+These are the groups the user livy belongs to in the Linux system:
+
+- `livy`: The user’s primary group (created by default when the user livy was added to the system).
+
+- `hadoop`: A secondary group, often used for Hadoop-related services/access.
+
+- `hdfsadmingroup`: Another secondary group (created manually to manage HDFS permissions).
+
+Now you're able to write your data analysis result on HDFS with the following code:
+
+```Python
+output_rdd.saveAsTextFile("hdfs:///output")
+```
+
+```shell
+hdfs dfs -ls /
+```
+```
+Found 6 items
+drwxr-xr-x   - hdfs   hdfsadmingroup          0 2025-05-25 15:19 /apps
+drwxr-xr-x   - hadoop hdfsadmingroup          0 2025-05-25 16:03 /input
+drwxr-xr-x   - livy   hdfsadmingroup          0 2025-05-25 16:13 /output
+drwxrwxrwt   - hdfs   hdfsadmingroup          0 2025-05-25 15:21 /tmp
+drwxr-xr-x   - hdfs   hdfsadmingroup          0 2025-05-25 15:19 /user
+drwxr-xr-x   - hdfs   hdfsadmingroup          0 2025-05-25 15:19 /var
+```
+
+- `livy`: Owner of the directory; `hdfsadmingroup`: Group associated with the directory.
+  
 ### Spark Programming
 
 ```python
